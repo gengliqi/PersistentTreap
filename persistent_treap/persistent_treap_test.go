@@ -32,7 +32,7 @@ func (s KVSlice) Len() int           { return len(s) }
 func (s KVSlice) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s KVSlice) Less(i, j int) bool { return s[i].k.Less(s[j].k) }
 
-func checkIsSame(t *testing.T, treap *PersistentTreap, mp map[Key]Value) {
+func checkIsSame(t *testing.T, treap PersistentTreap, mp map[Key]Value) {
 	var kvSlice KVSlice
 	for k, v := range mp {
 		kvSlice = append(kvSlice, KV{Key(k), Value(v)})
@@ -51,7 +51,7 @@ func randomInsertRemoveGetCount(t *testing.T, Count int) {
 	keyRange := uint32(100000)
 
 	mp := make(map[Key]Value)
-	treaps := make([]*PersistentTreap, Count+1)
+	treaps := make([]PersistentTreap, Count+1)
 	treaps[0] = NewPersistentTreap()
 	var maps []map[Key]Value
 	var mapPos []int

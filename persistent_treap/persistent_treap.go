@@ -9,42 +9,42 @@ type PersistentTreap struct {
 	root *treapNode
 }
 
-func NewPersistentTreap() *PersistentTreap {
-	return &PersistentTreap{}
+func NewPersistentTreap() PersistentTreap {
+	return PersistentTreap{root: nil}
 }
 
-func (tree *PersistentTreap) Find(key Sortable) bool {
+func (tree PersistentTreap) Find(key Sortable) bool {
 	return tree.root.find(key)
 }
 
-func (tree *PersistentTreap) GetValue(key Sortable) (Equitable, bool) {
+func (tree PersistentTreap) GetValue(key Sortable) (Equitable, bool) {
 	return tree.root.getValue(key)
 }
 
 // Return a new tree whose data is equal to previous tree + key, value
-func (tree *PersistentTreap) Insert(key Sortable, value Equitable) *PersistentTreap {
+func (tree PersistentTreap) Insert(key Sortable, value Equitable) PersistentTreap {
 	newRoot := tree.root.insert(key, value)
 	if newRoot == tree.root {
 		return tree
 	}
-	return &PersistentTreap{newRoot}
+	return PersistentTreap{newRoot}
 }
 
 // Return a new tree whose data is equal to previous tree - key.
 // If the key is not exist, the new tree's root is the same as previous one
-func (tree *PersistentTreap) Remove(key Sortable) *PersistentTreap {
+func (tree PersistentTreap) Remove(key Sortable) PersistentTreap {
 	newRoot := tree.root.remove(key)
 	if newRoot == tree.root {
 		return tree
 	}
-	return &PersistentTreap{newRoot}
+	return PersistentTreap{newRoot}
 }
 
-func (tree *PersistentTreap) Size() uint32 {
+func (tree PersistentTreap) Size() uint32 {
 	return tree.root.size()
 }
 
-func (tree *PersistentTreap) Clear() *PersistentTreap {
+func (tree PersistentTreap) Clear() PersistentTreap {
 	return NewPersistentTreap()
 }
 
@@ -59,7 +59,7 @@ func (u *PersistentTreap) GetAllKeyValue() []TreapKeyValueRef {
 	return uKV
 }
 
-func IsSameTreap(u, v *PersistentTreap) bool {
+func IsSameTreap(u, v PersistentTreap) bool {
 	if u.Size() != v.Size() {
 		return false
 	}
@@ -101,7 +101,7 @@ func newTreapNode(key Sortable, value Equitable) *treapNode {
 		left:     nil,
 		right:    nil,
 		key:      key,
-		value:    value,
+		val:      value,
 		priority: rand.Uint32(),
 		sz:       1,
 	}

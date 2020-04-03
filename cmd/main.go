@@ -22,7 +22,7 @@ func (a Value) Equals(b persistent_treap.Equitable) bool {
 const Count = 100
 
 func main() {
-	treaps := make([]*persistent_treap.PersistentTreap, int(Count+1))
+	treaps := make([]persistent_treap.PersistentTreap, int(Count+1))
 	treaps[0] = persistent_treap.NewPersistentTreap()
 
 	for i := 1; i <= Count; i++ {
