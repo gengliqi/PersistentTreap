@@ -97,7 +97,14 @@ type treapNode struct {
 }
 
 func newTreapNode(key Sortable, value Equitable) *treapNode {
-	return &treapNode{nil, nil, key, value, rand.Uint32(), 1}
+	return &treapNode{
+		left:     nil,
+		right:    nil,
+		key:      key,
+		value:    value,
+		priority: rand.Uint32(),
+		sz:       1,
+	}
 }
 
 func (u *treapNode) updateSize() {
